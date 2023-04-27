@@ -24,19 +24,21 @@
               @if(Auth::check())
 
               <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
-                <a class="btn {{Request::is('my-meetings/*') ? 'btn-success' : 'btn-secondary'}} w-100" href="/my-runs">My runs</a>
+                <a class="btn {{Request::is('my-meetings/*') ? 'btn-success' : 'btn-secondary'}} w-100" href="{{ url("/my-runs")}}">My runs</a>
               </li>
               @endif
 
-              @if(Auth::check() && Auth::User()->privilage > 0)
+              @if(Auth::check())
 
               <li class="nav-item dropdown me-3 mb-3 mb-md-0">
                   <a class="btn btn-secondary dropdown-toggle w-100 {{Request::is('manage-meetings') || Request::is('meeting/create') ? 'btn-success' : 'btn-secondary'}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Runs
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ url('/manage-meetings') }}">Moderate runs</a></li>
-                    <li><a class="dropdown-item" href="/meeting/create">Create new run</a></li>
+                    @if(Auth::user()->privilage>0)
+                    <li><a class="dropdown-item" href="{{ url('/manage-runs') }}">Moderate runs</a></li>
+                    @endif
+                    <li><a class="dropdown-item" href="{{ url('create-run')}}">Create new run</a></li>
                   </ul>
               </li>
 
@@ -53,12 +55,13 @@
               @if(Auth::check())
 
               <li class="nav-item dropdown  me-3 mb-3 mb-md-0">
-                <a class="btn {{Request::is('edit-profile') ? 'btn-success' : 'btn-secondary'}} dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="btn {{Request::is('edit-profile') ? 'btn-success' : 'btn-secondary'}} w-100 btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                   <img
                     id = "displayIMG"
                     src="{{Auth::user()->picture}}"
                     width="20"
                     height="20"
+                    style="border-radius: 50%;"
                   />
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
