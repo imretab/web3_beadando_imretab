@@ -44,7 +44,30 @@ class UserController extends Controller
     }
     public function EditProfile(Request $request){
         $fields = $request->validate([
-
+            'name'=>['required'],
+            'email'=>['required','email'],
+            'password'=>['confirmed'],
+            't_link'=>[],
+            's_link'=>[]
         ]);
+        if($request->hasFile('picture')){
+            $fields['picture'] = $request->file('picture')->store('Images/Uploads/Users','public');
+            $fields['picture'] = '/storage/'.$fields['picture'];
+        }
+        else{
+            $fields['picture'] = '/default_profilepic.png';
+        }
+        $user = auth()->user();
+        $user->name = $fields['name'];
+        $user->email = $fields['email'];
+        $user->picture = $fields['picture'];
+        $user->twitch_link = $fields['t_link'];
+        $user->steam_link = $fields['s_link'];
+        if($request->has('password') && $request->get('password')!= ''){
+            $fields['password'] = bcrypt($fields['password']);
+            $user->password = $fields['password'];
+        }
+        $user->save();
+        return redirect('/edit-profile');
     }
 }
