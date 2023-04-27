@@ -23,7 +23,9 @@ class User extends Authenticatable
         'password',
         'picture',
         'privilage',
-        'status'
+        'status',
+        'twitch_link',
+        'steam_link'
     ];
 
     /**
