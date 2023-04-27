@@ -23,7 +23,7 @@
               @if(Auth::check())
 
               <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
-                <a class="btn {{Request::is('my-meetings/*') ? 'btn-success' : 'btn-secondary'}} w-100" href="/my-meetings">My meetings</a>
+                <a class="btn {{Request::is('my-meetings/*') ? 'btn-success' : 'btn-secondary'}} w-100" href="/my-runs">My runs</a>
               </li>
               @endif
 
@@ -31,22 +31,12 @@
 
               <li class="nav-item dropdown me-3 mb-3 mb-md-0">
                   <a class="btn btn-secondary dropdown-toggle w-100 {{Request::is('manage-meetings') || Request::is('meeting/create') ? 'btn-success' : 'btn-secondary'}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    Meetings
+                    Runs
                   </a>
                   <ul class="dropdown-menu">
-                    <li><a class="dropdown-item" href="{{ url('/manage-meetings') }}">Manage meetings</a></li>
-                    <li><a class="dropdown-item" href="/meeting/create">Create new meeting</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/manage-meetings') }}">Moderate runs</a></li>
+                    <li><a class="dropdown-item" href="/meeting/create">Create new run</a></li>
                   </ul>
-              </li>
-
-              <li class="nav-item dropdown me-3 mb-3 mb-md-0">
-                <a class="btn btn-secondary dropdown-toggle w-100 {{Request::is('manage-teams') || Request::is('team/create') ? 'btn-success' : 'btn-secondary'}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  Teams
-                </a>
-                <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="{{ url('/manage-teams') }}">Manage teams</a></li>
-                  <li><a class="dropdown-item" href="{{url('/team/create')}}">Create new team</a></li>
-                </ul>
               </li>
 
               @endif
