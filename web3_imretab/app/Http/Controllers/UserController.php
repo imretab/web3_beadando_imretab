@@ -28,7 +28,7 @@ class UserController extends Controller
                 return back()->withErrors(['password'=>'This user has been suspended!'])->onlyInput('password');
             }
             else{
-                return "Login Successful";
+                return redirect('edit-profile');
             }
         }
         return redirect('/sign-in')->withErrors(['password'=>'Invalid credentials'])->onlyInput('password');   
@@ -38,5 +38,13 @@ class UserController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         return redirect('/');
+    }
+    public function Profile(){
+        return view('User.edit_profile');
+    }
+    public function EditProfile(Request $request){
+        $fields = $request->validate([
+
+        ]);
     }
 }
