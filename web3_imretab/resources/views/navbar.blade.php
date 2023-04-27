@@ -8,6 +8,7 @@
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/template.css')}}">
     <script src="{{ url('assets/js/bootstrap.js') }}"></script>
+    <script src="{{ url('assets/js/registration.profilepic.js') }}"></script>
     @yield('title')
 </head>
 <body>
@@ -52,8 +53,13 @@
               @if(Auth::check())
 
               <li class="nav-item dropdown  me-3 mb-3 mb-md-0">
-                <a class="btn {{Request::is('edit-profile') ? 'btn-success' : 'btn-secondary'}} dropdown-toggle w-100 " type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  {{Auth::user()->full_name}}
+                <a class="btn {{Request::is('edit-profile') ? 'btn-success' : 'btn-secondary'}} dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                  <img
+                    id = "displayIMG"
+                    src="{{Auth::user()->picture}}"
+                    width="20"
+                    height="20"
+                  />
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
                   <li><a class="dropdown-item" href="{{ url('/edit-profile') }}">Edit profile</a></li>
