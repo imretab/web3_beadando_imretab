@@ -3,7 +3,9 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
@@ -18,5 +20,29 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
+        User::create([
+            'name' => 'Admin',
+            'email' => 'admin@srun.com',
+            'password' => Hash::make('password'),
+            'privilage' => 2,
+            'picture' => '/default_profilepic.png',
+            'status' => 0
+        ]);
+        User::create([
+            'name' => 'Mod',
+            'email' => 'mod@srun.com',
+            'password' => Hash::make('password'),
+            'privilage' => 1,
+            'picture' => '/default_profilepic.png',
+            'status' => 0
+        ]);
+        User::create([
+            'name' => 'User',
+            'email' => 'user@srun.com',
+            'password' => Hash::make('password'),
+            'privilage' => 0,
+            'picture' => '/default_profilepic.png',
+            'status' =>0
+        ]);
     }
 }
