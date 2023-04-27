@@ -26,7 +26,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'privilage' => 2,
             'picture' => '/default_profilepic.png',
-            'status' => 0
+            'status' => 0,
+            'twitch_link' => 'www.twitch.com',
+            'steam_link' => 'store.steampowered.com'
         ]);
         User::create([
             'name' => 'Mod',
@@ -34,7 +36,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'privilage' => 1,
             'picture' => '/default_profilepic.png',
-            'status' => 0
+            'status' => 0,
+            'twitch_link' => 'www.twitch.com',
+            'steam_link' => 'store.steampowered.com'
         ]);
         User::create([
             'name' => 'User',
@@ -42,7 +46,9 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password'),
             'privilage' => 0,
             'picture' => '/default_profilepic.png',
-            'status' =>0
+            'status' =>0,
+            'twitch_link' => 'www.twitch.com',
+            'steam_link' => 'store.steampowered.com'
         ]);
     }
 }
