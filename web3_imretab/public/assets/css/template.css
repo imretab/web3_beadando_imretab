@@ -25,7 +25,8 @@
 }
 
 body {
-	background-image: url('/bg-2.jpg');
+	/*background-image: url('/bg-2.jpg');*/
+	background-color: black;
 }
 
 .bordered {
