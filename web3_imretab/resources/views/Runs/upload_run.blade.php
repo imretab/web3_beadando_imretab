@@ -7,59 +7,35 @@
         <h1 class="mb-3">Upload speedrun</h1>
         <h5 class="mb-4">Site where you can upload your speedruns</h5>
 
-        <form action={{ url('/edit-profile') }} method="POST" enctype="multipart/form-data">
+        <form action={{ url('/create-run') }} method="POST" enctype="multipart/form-data">
         @csrf
             <div class="form-outline mb-4">
 
-                <label class="pe-3 fw-bold form-label" for="profilePic">
-                    Your profile image
-                </label>
-                @if(Auth::check())
-                <img
-                    name="displayIMG"
-                    id="displayIMG"
-                    src="{{ Auth::user()->picture }}"
-                    style="width: 250px; height: 250px; display: block; margin-left: auto; margin-right: auto;"
-                    alt="Not Found"
-                    title="Profile Image"
-                />
-                @endif
-              </div>
-
-
-            <div class="form-outline mb-4">
-
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="profilePic">
-                    Profile image
+                    Run category*
                 </label>
 
-                <input
-                    type="file"
-                    name="picture"
-                    id="profilePic"
-                    accept="image/*"
-                    class="form-control form-control-lg"
-                    placeholder="Choose your profile picture"
-                />
+                <select class="form-select" aria-label="Default select example" name="category">
+                    @foreach ($category_options as $c)
+                        <option value={{$c->id}}>{{$c->categories}}</option>
+                    @endforeach
+                  </select>
             </div>
 
             <div class="form-outline mb-4">
 
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="fullName">
-                    Nickname
+                    Run title*
                 </label>
-                @if (Auth::check())
                 <input
-                    name="name"
+                    name="runTitle"
                     type="text"
                     id="fullName"
                     class="form-control form-control-lg"
-                    placeholder="Enter your full name"
-                    value="{{Auth::User()->name}}"
+                    placeholder="Enter the title of the run"
                     
                 />
-                @endif
-                @error('name')
+                @error('runTitle')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
 
@@ -68,20 +44,16 @@
             <div class="form-outline mb-4">
 
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="email">
-                    Email address
+                    Time*
                 </label>
-                @if(Auth::check())
                 <input
-                    name="email"
-                    type="email"
+                    name="time"
+                    type="text"
                     id="email"
                     class="form-control form-control-lg"
-                    placeholder="Give a valid email address"
-                    value="{{Auth::User()->email}}"
-                    
+                    placeholder="Accepted format: h:m:s.ms"
                 />
-                @endif
-                @error('email')
+                @error('time')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
             </div>
@@ -89,19 +61,19 @@
             <div class="form-outline mb-4">
 
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="password">
-                    Password
+                    Youtube link for the run*
                 </label>
 
                 <input
-                    name="password"
-                    type="password"
+                    name="ylink"
+                    type="text"
                     id="password"
                     class="form-control form-control-lg"
-                    placeholder="Enter password"
+                    placeholder="Youtube link for the run"
                     
                 />
 
-                @error('password')
+                @error('ylink')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
 
@@ -110,19 +82,19 @@
             <div class="form-outline mb-4">
 
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="passwordConfirm">
-                    Confirm password
+                    Comment (optional)
                 </label>
 
                 <input
-                    name="password_confirmation"
-                    type="password"
+                    name="commentonrun"
+                    type="textarea"
                     id="password_confirmation"
                     class="form-control form-control-lg"
                     placeholder="Confirm your password"
                     
                 />
 
-                @error('password_confirmation')
+                @error('commentonrun')
                     <p class="text-red-500 text-xs mt-1">{{$message}}</p>
                 @enderror
 
@@ -132,7 +104,7 @@
 
                 <div class="text-center">
                     <button type="submit" class="btn btn-outline-light btn-lg m-2">
-                        Modify Account
+                        Submit run
                     </button>
                 </div>
 
