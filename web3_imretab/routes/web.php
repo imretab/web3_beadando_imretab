@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\RunController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +19,10 @@ Route::get('/', function () {
 });
 Route::get('/sign-in',[UserController::class,'Login']);
 Route::post('/sign-in',[UserController::class,'SignIn']);
+Route::get('/sign-up',[UserController::class,'Register']);
+Route::post('/sign-up',[UserController::class,'SignIn']);
 Route::get('/sign-out',[UserController::class,'LogOut']);
 Route::get('/edit-profile',[UserController::class,'Profile'])->middleware('auth');
 Route::post('/edit-profile',[UserController::class,'EditProfile'])->middleware('auth');
+Route::get('/create-run',[RunController::class,'ShowCategory']);
+Route::post('/create-run',[RunController::class,'UploadRun']);
