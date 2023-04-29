@@ -38,7 +38,7 @@
                     @if(Auth::user()->privilage>0)
                     <li><a class="dropdown-item" href="{{ url('/manage-runs') }}">Moderate runs</a></li>
                     @endif
-                    <li><a class="dropdown-item" href="{{ url('create-run')}}">Create new run</a></li>
+                    <li><a class="dropdown-item" href="{{ url('/create-run')}}">Create new run</a></li>
                   </ul>
               </li>
 
