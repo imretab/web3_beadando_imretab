@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Schema;
 class Run extends Model
 {
     use HasFactory;
+    public $timestamps = false;
     protected $fillable = [
         'uploader',
         'run_category',
