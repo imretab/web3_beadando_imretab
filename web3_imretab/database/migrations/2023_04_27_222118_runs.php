@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('run_title');
             $table->string('time');
             $table->string('youtube_link');
-            $table->string('comment_onrun');
+            $table->string('comment_onrun')->nullable();
             $table->unsignedBigInteger('uploader');
             $table->foreign('uploader')->references('id')->on('users');
         });
