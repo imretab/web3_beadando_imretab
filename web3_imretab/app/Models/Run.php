@@ -18,6 +18,7 @@ class Run extends Model
         'run_title',
         'time',
         'youtube_link',
-        'comment_onrun'
+        'comment_onrun',
+        'uploaded_at'
     ];
 }
