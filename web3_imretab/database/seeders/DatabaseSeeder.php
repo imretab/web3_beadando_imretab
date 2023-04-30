@@ -6,6 +6,7 @@ namespace Database\Seeders;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use App\Models\Category;
 
 class DatabaseSeeder extends Seeder
 {
@@ -49,6 +50,24 @@ class DatabaseSeeder extends Seeder
             'status' =>0,
             'twitch_link' => 'www.twitch.com',
             'steam_link' => 'store.steampowered.com'
+        ]);
+        Category::create([
+            'categories' => 'Re-Volt (1999)'
+        ]);
+        Category::create([
+            'categories' => 'Need For Speed Hot Pursuit 2 (2002)'
+        ]);
+        Category::create([
+            'categories' => 'Need For Speed Underground (2003)'
+        ]);
+        Category::create([
+            'categories' => 'Need For Speed Underground 2 (2004)'
+        ]);
+        Category::create([
+            'categories' => 'Need For Speed Most Wanted (2005)'
+        ]);
+        Category::create([
+            'categories' => 'Need For Speed Cabron (2006)'
         ]);
     }
 }
