@@ -12,14 +12,16 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('runs', function (Blueprint $table) {
+            //$table->dropForeign('uploader_id');
             $table->id();
-            $table->integer('run_category');
             $table->string('run_title');
             $table->string('time');
             $table->string('youtube_link');
             $table->string('comment_onrun')->nullable();
             $table->unsignedBigInteger('uploader');
-            $table->foreign('uploader')->references('id')->on('users');
+            $table->unsignedBigInteger('run_category');
+            $table->foreign('uploader')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('run_category')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 
