@@ -20,15 +20,17 @@ class RunController extends Controller
             'runTitle' => ['required'],
             'time' => ['required'],
             'ylink' =>['required'],
-            'commentonrun' => []
+            'commentonrun' => ''
         ]);
+        $now = now()->format('Y-m-d');
         $run = Run::create([
             'run_category' => $fields['category'],
             'run_title' => $fields['runTitle'],
             'time' => $fields['time'],
             'youtube_link' => $fields['ylink'],
             'comment_onrun' => $fields['commentonrun'],
-            'uploader' => Auth::user()->id
+            'uploader' => Auth::user()->id,
+            'uploaded_at'=>$now
         ]);
         return redirect('/create-run');
     }
