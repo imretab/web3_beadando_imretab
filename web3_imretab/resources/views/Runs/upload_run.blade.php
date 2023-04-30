@@ -90,7 +90,7 @@
                     type="textarea"
                     id="password_confirmation"
                     class="form-control form-control-lg"
-                    placeholder="Confirm your password"
+                    placeholder="Comment or run"
                     
                 />
 
