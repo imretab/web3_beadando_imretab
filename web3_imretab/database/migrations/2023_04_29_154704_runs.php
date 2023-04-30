@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('comment_onrun')->nullable();
             $table->unsignedBigInteger('uploader');
             $table->unsignedBigInteger('run_category');
+            $table->timestamp('uploaded_at');
             $table->foreign('uploader')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('run_category')->references('id')->on('categories')->onDelete('cascade');
         });
