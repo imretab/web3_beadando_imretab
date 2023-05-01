@@ -6,25 +6,29 @@
 
         <h1 class="mb-3">Moderate speedruns</h1>
         <h5 class="mb-4">Site where you can moderate everyone's speedruns</h5>
-
-        <form action={{ url('/manage-runs') }} method="POST" enctype="multipart/form-data">
-        @csrf
             @foreach ($allRuns as $runs)
             <div>
                 <br>
                 {{$runs->run_title}}
+                {{$runs->uploaderName->name}}
+                {{$runs->runCategory->categories}}
                 <br>
-                @if($runs->isApproved == 0)
+                @if($runs->isAccepted == 0)
                     Needs approval
+                    <a href="/manage-runs/{{$runs->id}}" class="btn btn-success">Accept run</a>
                 @else
                     Approved
+                    <a href="/manage-runs/{{$runs->id}}" class="btn btn-danger">It was a misinput MISINPUT</a>
                 @endif
             </div>
             @endforeach
-
-        </form>
-
+        <div class="row p-5">
+            <div class="col-12">
+                {{ $allRuns->links('pagination::bootstrap-5') }}
+            </div>
+        </div>
     </div>
+
 </div>
 
 @endsection
