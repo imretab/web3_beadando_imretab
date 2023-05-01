@@ -20,7 +20,9 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-
+              <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
+                <a class="btn {{Request::is('runs') ? 'btn-success' : 'btn-secondary'}} w-100" href="{{ url("/runs")}}">All runs</a>
+              </li>
               @if(Auth::check())
 
               <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
