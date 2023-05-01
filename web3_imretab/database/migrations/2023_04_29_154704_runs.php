@@ -15,12 +15,13 @@ return new class extends Migration
             //$table->dropForeign('uploader_id');
             $table->id();
             $table->string('run_title');
-            $table->string('time');
+            $table->time('time',$precision = 3)->format('H:i:s.u');
             $table->string('youtube_link');
             $table->string('comment_onrun')->nullable();
             $table->unsignedBigInteger('uploader');
             $table->unsignedBigInteger('run_category');
-            $table->timestamp('uploaded_at');
+            $table->timestamp('uploaded_at')->default(\DB::raw('CURRENT_TIMESTAMP'));
+            $table->tinyInteger('isAccepted');
             $table->foreign('uploader')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('run_category')->references('id')->on('categories')->onDelete('cascade');
         });
