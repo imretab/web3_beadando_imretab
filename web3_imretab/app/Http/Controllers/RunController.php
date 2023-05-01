@@ -43,4 +43,9 @@ class RunController extends Controller
         }
         return redirect('/create-run');
     }
+    public function ShowApproveRun(){
+        $runs = Run::all();
+        return view('Runs.list_approverequired')->
+        with('allRuns',$runs);
+    }
 }
