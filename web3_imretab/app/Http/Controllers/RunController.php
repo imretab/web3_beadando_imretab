@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Category;
 use App\Models\Run;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class RunController extends Controller
 {
@@ -44,8 +45,30 @@ class RunController extends Controller
         return redirect('/create-run');
     }
     public function ShowApproveRun(){
-        $runs = Run::all();
+        $runs = Run::select(
+            'id',
+            'uploader',
+            'run_category',
+            'run_title',
+            'time',
+            'youtube_link',
+            'comment_onrun',
+            'uploaded_at',
+            'isAccepted'
+        )->paginate(3);
         return view('Runs.list_approverequired')->
         with('allRuns',$runs);
+    }
+    public function ApproveRun(Run $run){
+        if(!Auth::check() || Auth::User()->privilage <1){
+            return abort(401);
+        }
+        $run->update(['isAccepted' =>$run->isAccepted == 0 ? 1:0]);
+        return redirect('/manage-runs');
+    }
+    public function ShowAllApprovedRuns(){
+        $runs = Run::where('isAccepted','=',1)->
+        orderBy('time','asc')->get();
+        return view('runs.approvedruns',['acceptedRuns'=>$runs]);
     }
 }
