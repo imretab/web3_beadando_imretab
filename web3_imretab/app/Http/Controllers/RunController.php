@@ -22,16 +22,25 @@ class RunController extends Controller
             'ylink' =>['required'],
             'commentonrun' => ''
         ]);
-        $now = now()->format('Y-m-d');
-        $run = Run::create([
-            'run_category' => $fields['category'],
-            'run_title' => $fields['runTitle'],
-            'time' => $fields['time'],
-            'youtube_link' => $fields['ylink'],
-            'comment_onrun' => $fields['commentonrun'],
-            'uploader' => Auth::user()->id,
-            'uploaded_at'=>$now
-        ]);
+        $createError = 0;
+        $now = date('Y-m-d H:i:s',strtotime('+ 2 hours'));
+        try
+        {
+            $run = Run::create([
+                'run_category' => $fields['category'],
+                'run_title' => $fields['runTitle'],
+                'time' => $fields['time'],
+                'youtube_link' => $fields['ylink'],
+                'comment_onrun' => $fields['commentonrun'],
+                'uploader' => Auth::user()->id,
+                'uploaded_at'=>$now,
+                'isAccepted'=>0
+            ]);
+        }
+        catch (\Throwable $th) {
+            $createError += 1;
+            return redirect('/create-run')->withErrors(['time'=>'Bad format for time'])->onlyInput('time');
+        }
         return redirect('/create-run');
     }
 }
