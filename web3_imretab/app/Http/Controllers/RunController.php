@@ -45,6 +45,9 @@ class RunController extends Controller
         return redirect('/create-run');
     }
     public function ShowApproveRun(){
+        if(!Auth::check() || Auth::User()->privilage <1){
+            return abort(401);
+        }
         $runs = Run::select(
             'id',
             'uploader',
@@ -63,6 +66,7 @@ class RunController extends Controller
         if(!Auth::check() || Auth::User()->privilage <1){
             return abort(401);
         }
+        
         $run->update(['isAccepted' =>$run->isAccepted == 0 ? 1:0]);
         return redirect('/manage-runs');
     }
