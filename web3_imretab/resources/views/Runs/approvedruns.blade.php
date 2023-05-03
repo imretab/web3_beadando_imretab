@@ -1,6 +1,5 @@
 @extends('navbar')
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-
 @section('content')
 <script src="{{ url('assets/js/registration.profilepic.js') }}"></script>
 
@@ -20,16 +19,7 @@
             <div class="row border border-warning">
                 <div class="col border-end border-warning">
                     <div id="placement">
-                        <script language="JavaScript" type="text/javascript">
-                                var count = 1;
-                                var div = document.getElementsByClassName('place');
-                                var place = document.getElementById('placement');
-                                $('#placement').html(count.toString());
-                                for(let i = 0;i<div.length-1;i++){
-                                    count++;
-                                }
-                                console.log(count);
-                            </script>
+                        {{$place+=1}}
                     </div>
                 </div>
                 <div class="col border-end border-warning">{{$runs->runCategory->categories}}</div>
