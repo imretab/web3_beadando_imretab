@@ -75,4 +75,18 @@ class RunController extends Controller
         orderBy('time','asc')->get();
         return view('runs.approvedruns',['acceptedRuns'=>$runs]);
     }
+    public function ShowLoggedInRuns(){
+        if(!Auth::check()){
+            return abort(401);
+        }
+        $myRuns = Run::where('uploader','=',Auth::user()->id)->get();
+        return view('Runs.list_myruns',['myRuns'=>$myRuns]);
+    }
+    public function ShowSelectedRun(Run $run){
+        if(!Auth::check()){
+            return abort(401);
+        }
+        $run = Run::where('uploader','=',Auth::user()->id)->get();
+        return view('Runs.list_myruns',['myRuns'=>$run]);
+    }
 }
