@@ -72,8 +72,11 @@ class RunController extends Controller
     }
     public function ShowAllApprovedRuns(){
         $runs = Run::where('isAccepted','=',1)->
-        orderBy('time','asc')->get();
-        return view('runs.approvedruns',['acceptedRuns'=>$runs]);
+        orderBy('time','asc')->
+        orderBy('run_category','asc')
+        ->get();
+        $count = 0;
+        return view('runs.approvedruns',['acceptedRuns'=>$runs,'place'=>$count]);
     }
     public function ShowLoggedInRuns(){
         if(!Auth::check()){

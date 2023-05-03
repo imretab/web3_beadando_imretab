@@ -39,6 +39,28 @@ class UserController extends Controller
         $request->session()->regenerateToken();
         return redirect('/');
     }
+    public function Register(){
+        return view('User.signup');
+    }
+    public function SignUp(Request $request){
+        $fields = $request->validate([
+            'full_name'=>['required'],
+            'email'=>['required','email'],
+            'password'=>['required','confirmed','min:8']
+        ]);
+        if($request->hasFile('picture')){
+            $fields['picture'] = $request->file('picture')->store('Images/Uploads/Users','public');
+            $fields['picture'] = '/storage/'.$fields['picture'];
+        }
+        else{
+            $fields['picture'] = '/profile_pic_sample.png';
+        }
+        $fields['password'] = bcrypt($fields['password']);
+        $fields['privilage'] = 0;
+        $fields['status'] = 0;
+        $user = User::create($fields);
+        return redirect('/sign-in');
+    }
     public function Profile(){
         return view('User.edit_profile');
     }
