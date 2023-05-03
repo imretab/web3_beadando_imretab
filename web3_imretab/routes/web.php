@@ -27,5 +27,7 @@ Route::post('/edit-profile',[UserController::class,'EditProfile'])->middleware('
 Route::get('/create-run',[RunController::class,'ShowCategory']);
 Route::post('/create-run',[RunController::class,'UploadRun']);
 Route::get('/manage-runs',[RunController::class,'ShowApproveRun']);
-Route::get('manage-runs/{run}',[RunController::class,'ApproveRun']);
+Route::get('/manage-runs/{run}',[RunController::class,'ApproveRun']);
 Route::get('/runs',[RunController::class,'ShowAllApprovedRuns']);
+Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns']);
+Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun']);
