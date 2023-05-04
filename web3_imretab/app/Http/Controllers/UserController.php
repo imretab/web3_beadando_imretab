@@ -44,16 +44,18 @@ class UserController extends Controller
     }
     public function SignUp(Request $request){
         $fields = $request->validate([
-            'full_name'=>['required'],
+            'name'=>['required'],
             'email'=>['required','email'],
-            'password'=>['required','confirmed','min:8']
+            'password'=>['required','confirmed','min:8'],
+            's_link'=>[],
+            't_link'=>[]
         ]);
         if($request->hasFile('picture')){
             $fields['picture'] = $request->file('picture')->store('Images/Uploads/Users','public');
             $fields['picture'] = '/storage/'.$fields['picture'];
         }
         else{
-            $fields['picture'] = '/profile_pic_sample.png';
+            $fields['picture'] = '/default_profilepic.png';
         }
         $fields['password'] = bcrypt($fields['password']);
         $fields['privilage'] = 0;
