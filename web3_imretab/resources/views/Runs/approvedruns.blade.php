@@ -1,4 +1,7 @@
 @extends('navbar')
+@section('title')
+    <title>Runs</title>
+@endsection
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 @section('content')
 <script src="{{ url('assets/js/registration.profilepic.js') }}"></script>
