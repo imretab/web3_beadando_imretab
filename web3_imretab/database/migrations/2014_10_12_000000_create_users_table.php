@@ -20,8 +20,8 @@ return new class extends Migration
             $table->string('picture');
             $table->tinyInteger('privilage');
             $table->tinyInteger('status');
-            $table->string('twitch_link');
-            $table->string('steam_link');
+            $table->string('twitch_link')->nullable();
+            $table->string('steam_link')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
