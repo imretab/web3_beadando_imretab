@@ -2,6 +2,7 @@
 use App\Http\Controllers\RunController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,7 +16,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('navbar');
+    $categories = Category::all();
+    return view('navbar')->with('category_options',$categories);
 });
 Route::get('/sign-in',[UserController::class,'Login']);
 Route::post('/sign-in',[UserController::class,'SignIn']);
