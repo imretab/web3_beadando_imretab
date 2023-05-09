@@ -70,13 +70,17 @@ class RunController extends Controller
         $run->update(['isAccepted' =>$run->isAccepted == 0 ? 1:0]);
         return redirect('/manage-runs');
     }
-    public function ShowAllApprovedRuns(){
+    public function ShowAllApprovedRuns(Request $request){
+        $categories = Category::all();
+        //dd($request->category);
         $runs = Run::where('isAccepted','=',1)->
-        orderBy('time','asc')->
-        orderBy('run_category','asc')
+        where('run_category','=',$request->category)->
+        orderBy('time','asc')
         ->get();
         $count = 0;
-        return view('runs.approvedruns',['acceptedRuns'=>$runs,'place'=>$count]);
+        $run_cat = Run::where('run_category','=',$request->category)->get();
+        dd($run_cat);
+        return view('runs.approvedruns',['acceptedRuns'=>$runs,'place'=>$count,'category_options'=>$categories]);
     }
     public function ShowLoggedInRuns(){
         if(!Auth::check()){
@@ -86,7 +90,7 @@ class RunController extends Controller
         return view('Runs.list_myruns',['myRuns'=>$myRuns]);
     }
     public function ShowSelectedRun(Run $run){
-        if(!Auth::check()){
+        if(!Auth::check() || Auth::user()->id != $run->uploader){
             return abort(401);
         }
         $run = Run::where([
