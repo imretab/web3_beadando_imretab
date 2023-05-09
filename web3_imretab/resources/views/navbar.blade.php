@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ url('assets/css/bootstrap.min.css') }}">
     <link rel="stylesheet" type="text/css" href="{{url('assets/css/template.css')}}">
     <script src="{{ url('assets/js/bootstrap.js') }}"></script>
@@ -21,12 +21,21 @@
           <div class="collapse navbar-collapse" id="navbarText">
             <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
               <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
-                <a class="btn {{Request::is('runs') ? 'btn-success' : 'btn-secondary'}} w-100" href="{{ url("/runs")}}">All runs</a>
-              </li>
+              <form method="get" action="/runs">
+                    <select class="form-select" aria-label="Default select example" name="category">
+                    @foreach ($category_options as $c)
+                        <option value={{$c->id}}>{{$c->categories}}</option>
+                    @endforeach
+                    
+                  </select></li>
+                  <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
+                  <button type="submit" class="btn btn-primary"><i class="fa fa-search"></i></button>
+                  </li>
+              </form>
+              
               @if(Auth::check())
-
               <li class="nav-item me-3 mb-3 mb-md-0 mt-3 mt-md-0">
-                <a class="btn {{Request::is('my-meetings/*') ? 'btn-success' : 'btn-secondary'}} w-100" href="{{ url("/my-runs")}}">My runs</a>
+                <a class="btn {{Request::is('my-runs') ? 'btn-success' : 'btn-secondary'}} w-100" href="{{ url("/my-runs")}}">My runs</a>
               </li>
               @endif
 
