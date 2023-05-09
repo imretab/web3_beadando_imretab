@@ -89,7 +89,39 @@ class RunController extends Controller
         if(!Auth::check()){
             return abort(401);
         }
-        $run = Run::where('uploader','=',Auth::user()->id)->get();
-        return view('Runs.list_myruns',['myRuns'=>$run]);
+        $run = Run::where([
+        ['uploader','=',Auth::user()->id],
+        ['id','=',$run->id]
+        ])->get();
+        $categories = Category::all();
+        return view('Runs.edit_myruns',['myRuns'=>$run,'category_options'=>$categories]);
+    }
+    public function EditSelectedRun(Run $run, Request $request){
+        if(!Auth::check()){
+            return abort(401);
+        }
+        $fields = $request->validate([
+            'category'=>['required'],
+            'runTitle' => ['required'],
+            'time' => ['required'],
+            'ylink' =>['required'],
+            'commentonrun' => ''
+        ]);
+        $createError = 0;
+        try
+        {
+            $run->run_category = $fields['category'];
+            $run->run_title = $fields['runTitle'];
+            $run->time = $fields['time'];
+            $run->youtube_link = $fields['ylink'];
+            $run->comment_onrun =$fields['commentonrun'];
+            $run->isAccepted = 0;
+            $run->save();
+        }
+        catch (\Throwable $th) {
+            $createError += 1;
+            return redirect('/edit-my-run/'.$run->id)->withErrors(['time'=>'Bad format for time'])->onlyInput('time');
+        }
+        return redirect('/edit-my-run/'.$run->id);
     }
 }
