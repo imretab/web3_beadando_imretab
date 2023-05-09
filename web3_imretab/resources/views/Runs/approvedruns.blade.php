@@ -10,28 +10,28 @@
     <div class="text-white bg-dark p-5 border border-3 border-secondary rounded-lg">
 
         <h1 class="mb-3">All the speedruns</h1>
-        <div class="row border border-primary">
-            <div class="col border-end border-primary"><h4>#</h4></div>
-            <div class="col border-end border-primary"><h4>Game</h4></div> 
-            <div class="col border-end border-primary"><h4>Runner</h4></div> 
-            <div class="col border-end border-primary"><h4>Title</h4></div> 
-            <div class="col border-end border-primary"><h4>Time</h4></div> 
+        <div class="row border border-dark">
+            <div class="col-1 border-end border-dark"><h4>#</h4></div>
+            <div class="col border-end border-dark"><h4>Game</h4></div> 
+            <div class="col border-end border-dark"><h4>Runner</h4></div> 
+            <div class="col border-end border-dark"><h4>Title</h4></div> 
+            <div class="col border-end border-dark"><h4>Time</h4></div> 
         </div>
             @foreach ($acceptedRuns as $runs)
             <div class="place">
-            <div class="row border border-warning">
-                <div class="col border-end border-warning">
+            <div class="row border border-primary">
+                <div class="col-1 border-end border-primary">
                     <div id="placement">
                         {{$place+=1}}
                     </div>
                 </div>
-                <div class="col border-end border-warning">{{$runs->runCategory->categories}}</div>
-                <div class="col border-end border-warning">{{$runs->uploaderName->name}}</div>
-                <div class="col border-end border-warning">{{$runs->run_title}}</div>
-                <div class="col border-end border-warning">{{$runs->time}}</div>
+                <div class="col border-end border-primary">{{$runs->runCategory->categories}}</div>
+                <div class="col border-end border-primary">{{$runs->uploaderName->name}}</div>
+                <div class="col border-end border-primary">{{$runs->run_title}}</div>
+                <div class="col border-end border-primary">{{$runs->time}}</div>
             </div>
         </div>
-            @endforeach
+        @endforeach
         
 </div>
 
