@@ -31,3 +31,4 @@ Route::get('/manage-runs/{run}',[RunController::class,'ApproveRun'])->middleware
 Route::get('/runs',[RunController::class,'ShowAllApprovedRuns']);
 Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns'])->middleware('auth');
 Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun'])->middleware('auth');
+Route::post('/edit-my-run/{run}',[RunController::class,'EditSelectedRun'])->middleware('auth');
