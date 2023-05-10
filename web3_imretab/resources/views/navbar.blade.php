@@ -24,7 +24,7 @@
               <form method="get" action="/runs">
                     <select class="form-select" aria-label="Default select example" name="category">
                     @foreach ($category_options as $c)
-                        <option value={{$c->id}}>{{$c->categories}}</option>
+                        <option value={{$c->id}} {{$c->id == $selected ? 'selected':''}}>{{$c->categories}}</option>
                     @endforeach
                     
                   </select></li>
@@ -42,7 +42,7 @@
               @if(Auth::check())
 
               <li class="nav-item dropdown me-3 mb-3 mb-md-0">
-                  <a class="btn btn-secondary dropdown-toggle w-100 {{Request::is('manage-meetings') || Request::is('meeting/create') ? 'btn-success' : 'btn-secondary'}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <a class="btn btn-secondary dropdown-toggle w-100 {{Request::is('manage-runs') || Request::is('create-run') ? 'btn-success' : 'btn-secondary'}}" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                     Runs
                   </a>
                   <ul class="dropdown-menu">
