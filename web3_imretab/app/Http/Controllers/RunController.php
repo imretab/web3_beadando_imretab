@@ -72,15 +72,12 @@ class RunController extends Controller
     }
     public function ShowAllApprovedRuns(Request $request){
         $categories = Category::all();
-        //dd($request->category);
         $runs = Run::where('isAccepted','=',1)->
         where('run_category','=',$request->category)->
         orderBy('time','asc')
         ->get();
         $count = 0;
-        $run_cat = Run::where('run_category','=',$request->category)->get();
-        dd($run_cat);
-        return view('runs.approvedruns',['acceptedRuns'=>$runs,'place'=>$count,'category_options'=>$categories]);
+        return view('runs.approvedruns',['acceptedRuns'=>$runs,'place'=>$count]);
     }
     public function ShowLoggedInRuns(){
         if(!Auth::check()){
@@ -98,7 +95,7 @@ class RunController extends Controller
         ['id','=',$run->id]
         ])->get();
         $categories = Category::all();
-        return view('Runs.edit_myruns',['myRuns'=>$run,'category_options'=>$categories]);
+        return view('Runs.edit_myruns',['myRuns'=>$run]);
     }
     public function EditSelectedRun(Run $run, Request $request){
         if(!Auth::check()){
