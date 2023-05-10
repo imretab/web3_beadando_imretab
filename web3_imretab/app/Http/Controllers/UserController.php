@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Run;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -93,5 +95,10 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/edit-profile');
+    }
+    public function ShowProfile(User $user){
+        $user = User::where('id','=',$user->id)->get();
+        $runs = Run::where('uploader','=',$user[0]->id)->get();
+        return view('User.runner_profile',['user'=>$user,'userRuns'=>$runs]);
     }
 }
