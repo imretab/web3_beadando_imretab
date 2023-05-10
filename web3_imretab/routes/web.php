@@ -16,8 +16,7 @@ use App\Models\Category;
 */
 
 Route::get('/', function () {
-    $categories = Category::all();
-    return view('navbar')->with('category_options',$categories);
+    return view('navbar');
 });
 Route::get('/sign-in',[UserController::class,'Login']);
 Route::post('/sign-in',[UserController::class,'SignIn']);
@@ -34,3 +33,4 @@ Route::get('/runs',[RunController::class,'ShowAllApprovedRuns']);
 Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns'])->middleware('auth');
 Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun'])->middleware('auth');
 Route::post('/edit-my-run/{run}',[RunController::class,'EditSelectedRun'])->middleware('auth');
+Route::get('/profile/{user}',[UserController::class,'ShowProfile']);
