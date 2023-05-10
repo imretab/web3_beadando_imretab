@@ -2,6 +2,7 @@
 use App\Http\Controllers\RunController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Category;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,10 +25,12 @@ Route::post('/sign-up',[UserController::class,'SignUp']);
 Route::get('/sign-out',[UserController::class,'LogOut']);
 Route::get('/edit-profile',[UserController::class,'Profile'])->middleware('auth');
 Route::post('/edit-profile',[UserController::class,'EditProfile'])->middleware('auth');
-Route::get('/create-run',[RunController::class,'ShowCategory']);
-Route::post('/create-run',[RunController::class,'UploadRun']);
-Route::get('/manage-runs',[RunController::class,'ShowApproveRun']);
-Route::get('/manage-runs/{run}',[RunController::class,'ApproveRun']);
+Route::get('/create-run',[RunController::class,'ShowCategory'])->middleware('auth');
+Route::post('/create-run',[RunController::class,'UploadRun'])->middleware('auth');
+Route::get('/manage-runs',[RunController::class,'ShowApproveRun'])->middleware('auth');
+Route::get('/manage-runs/{run}',[RunController::class,'ApproveRun'])->middleware('auth');
 Route::get('/runs',[RunController::class,'ShowAllApprovedRuns']);
-Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns']);
-Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun']);
+Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns'])->middleware('auth');
+Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun'])->middleware('auth');
+Route::post('/edit-my-run/{run}',[RunController::class,'EditSelectedRun'])->middleware('auth');
+Route::get('/profile/{user}',[UserController::class,'ShowProfile']);

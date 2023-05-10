@@ -56,14 +56,6 @@
 
         </div>
 
-        <div class="d-flex justify-content-between align-items-center">
-
-            <p class="small fw-bold mt-2 pt-1 mb-0">
-                <a href="{{ url('/request-password') }}" class="link-info">Forgot password?</a>
-            </p>
-
-        </div>
-
         <div class="text-center text-lg-start mt-4 pt-2">
 
             <div class="text-center">

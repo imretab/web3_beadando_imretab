@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 use App\Models\User;
+use App\Models\Run;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -44,16 +46,18 @@ class UserController extends Controller
     }
     public function SignUp(Request $request){
         $fields = $request->validate([
-            'full_name'=>['required'],
+            'name'=>['required'],
             'email'=>['required','email'],
-            'password'=>['required','confirmed','min:8']
+            'password'=>['required','confirmed','min:8'],
+            's_link'=>[],
+            't_link'=>[]
         ]);
         if($request->hasFile('picture')){
             $fields['picture'] = $request->file('picture')->store('Images/Uploads/Users','public');
             $fields['picture'] = '/storage/'.$fields['picture'];
         }
         else{
-            $fields['picture'] = '/profile_pic_sample.png';
+            $fields['picture'] = '/default_profilepic.png';
         }
         $fields['password'] = bcrypt($fields['password']);
         $fields['privilage'] = 0;
@@ -91,5 +95,10 @@ class UserController extends Controller
         }
         $user->save();
         return redirect('/edit-profile');
+    }
+    public function ShowProfile(User $user){
+        $user = User::where('id','=',$user->id)->get();
+        $runs = Run::where('uploader','=',$user[0]->id)->get();
+        return view('User.runner_profile',['user'=>$user,'userRuns'=>$runs]);
     }
 }

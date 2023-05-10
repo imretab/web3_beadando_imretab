@@ -1,6 +1,6 @@
 @extends('navbar')
 @section('title')
-    <title>Edit profile</title>
+    <title>Sign up</title>
 @endsection
 
 @section('content')
@@ -121,7 +121,6 @@
                 @enderror
 
             </div>
-            
             <div class="form-outline mb-4">
                 <label class="d-flex justify-content-start align-items-start pe-3 fw-bold form-label" for="t_link">
                     Twitch link (optional)
@@ -151,7 +150,7 @@
                     
                 />
             </div>
-
+        
             <div class="text-center text-lg-start mt-4 pt-2">
 
                 <div class="text-center">
