@@ -101,4 +101,27 @@ class UserController extends Controller
         $runs = Run::where('uploader','=',$user[0]->id)->get();
         return view('User.runner_profile',['user'=>$user,'userRuns'=>$runs]);
     }
+    public function ListUsers(){
+        if (!Auth::check() || Auth::User()->privilage != 2) {
+            return abort(401);
+        }
+
+        $listOfUsers = User::select(
+            'id',
+            'name',
+            'email',
+            'created_at',
+            'privilage',
+            'status',
+            'picture'
+        )->paginate(3);
+        return view('User.list')->with('Users',$listOfUsers);
+    }
+    public function ChangeStatus(User $user){
+        if (!Auth::check() || Auth::User()->privilage != 2) {
+            return abort(401);
+        }
+        $user->update(['status' => $user->status == 0 ? 1 : 0 ]);
+        return redirect('/users');
+    }
 }

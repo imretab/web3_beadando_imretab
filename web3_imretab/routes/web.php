@@ -34,3 +34,5 @@ Route::get('/my-runs',[RunController::class,'ShowLoggedInRuns'])->middleware('au
 Route::get('/edit-my-run/{run}',[RunController::class,'ShowSelectedRun'])->middleware('auth');
 Route::post('/edit-my-run/{run}',[RunController::class,'EditSelectedRun'])->middleware('auth');
 Route::get('/profile/{user}',[UserController::class,'ShowProfile']);
+Route::get('/users',[UserController::class,'ListUsers'])->middleware('auth');
+Route::get('/users/change-status/{user}', [UserController::class, 'ChangeStatus']);
