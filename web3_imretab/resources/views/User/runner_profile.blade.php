@@ -23,7 +23,7 @@
             <h4>No Steam link found for this user</h4>
             @endif
             @endforeach
-            <h4>His/her runs:</h4>
+            <h4>Their runs:</h4>
             @if(count($userRuns)<=0)
             <h4>They haven't uploaded any runs yet</h4>
             @else
